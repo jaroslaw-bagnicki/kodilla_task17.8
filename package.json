@@ -1,0 +1,20 @@
+{
+  "name": "task17.8",
+  "version": "1.0.0",
+  "description": "First Node server",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jaroslaw-bagnicki/kodilla_task17.8.git"
+  },
+  "author": "Jarosław Bagnicki <jarek@bagnicki.net>",
+  "license": "Unlicense",
+  "bugs": {
+    "url": "https://github.com/jaroslaw-bagnicki/kodilla_task17.8/issues"
+  },
+  "homepage": "https://github.com/jaroslaw-bagnicki/kodilla_task17.8#readme",
+  "dependencies": {}
+}
