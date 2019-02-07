@@ -1,11 +1,15 @@
 var http = require('http');
 var fs = require('fs');
 var EventEmitter = require('events').EventEmitter;
-var colors = require('colors');
+require('colors');
 
-var PORT = 8080;
+var config = {
+  HOSTNAME: '127.0.0.1',
+  PORT: 8080
+};
 
 var evetEmitter = new EventEmitter();
+
 evetEmitter.on('load file', function(path) {
   fs.readFile(path, function(err, data) {
     if (err) throw err;
@@ -14,9 +18,7 @@ evetEmitter.on('load file', function(path) {
 });
 
 console.log((getTime() + ' Starting server ...').yellow);
-
 var server = http.createServer();
-
 server.on('request', function(req, res) {
   console.log(getTime() + ' ' + req.method + ' on url ' + req.url);
   
@@ -39,8 +41,8 @@ server.on('request', function(req, res) {
   }
 });
 
-server.listen(PORT, function() {
-  console.log((getTime() + ' Server running at http://localhost:' + PORT +'/').yellow);
+server.listen(config.PORT, config.HOSTNAME, function() {
+  console.log((getTime() + ' Server running at http://' + config.HOSTNAME + ':' + config.PORT +'/').yellow);
 });
 
 function getTime() {
