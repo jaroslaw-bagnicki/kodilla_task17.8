@@ -6,6 +6,13 @@ var colors = require('colors');
 var PORT = 8080;
 
 var evetEmitter = new EventEmitter();
+evetEmitter.on('load file', function(path) {
+  console.log('laoding file ...');
+  fs.readFile(path, function(err, data) {
+    if (err) throw err;
+    evetEmitter.emit('file loaded', data);
+  });
+});
 
 console.log((getTime() + ' Starting server ...').yellow);
 
@@ -17,22 +24,16 @@ server.on('request', function(req, res) {
   if (req.method === 'GET' && req.url === '/') {
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
     res.statusCode = 200;
-    fs.readFile('./index.html', function(err, data) {
-      if (err) throw err;
-      evetEmitter.emit('index.html loaded', data);
-    });
-    evetEmitter.on('index.html loaded', function(data) {
+    evetEmitter.emit('load file', './index.html');
+    evetEmitter.on('file loaded', function(data) {
       res.write(data);
       res.end();
     });
   } else {
     res.setHeader('Content-Type', 'image/png');
     res.statusCode = 404;
-    fs.readFile('./404.png', function(err, data) {
-      if (err) throw err;
-      evetEmitter.emit('404.png loaded', data);
-    });
-    evetEmitter.on('404.png loaded', function(data) {
+    evetEmitter.emit('load file', './404.png');
+    evetEmitter.on('file loaded', function(data) {
       res.write(data);
       res.end();
     });
