@@ -16,5 +16,7 @@
     "url": "https://github.com/jaroslaw-bagnicki/kodilla_task17.8/issues"
   },
   "homepage": "https://github.com/jaroslaw-bagnicki/kodilla_task17.8#readme",
-  "dependencies": {}
+  "dependencies": {
+    "colors": "^1.3.3"
+  }
 }
