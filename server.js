@@ -7,7 +7,6 @@ var PORT = 8080;
 
 var evetEmitter = new EventEmitter();
 evetEmitter.on('load file', function(path) {
-  console.log('laoding file ...');
   fs.readFile(path, function(err, data) {
     if (err) throw err;
     evetEmitter.emit('file loaded', data);
@@ -25,7 +24,7 @@ server.on('request', function(req, res) {
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
     res.statusCode = 200;
     evetEmitter.emit('load file', './index.html');
-    evetEmitter.on('file loaded', function(data) {
+    evetEmitter.once('file loaded', function(data) {
       res.write(data);
       res.end();
     });
@@ -33,7 +32,7 @@ server.on('request', function(req, res) {
     res.setHeader('Content-Type', 'image/png');
     res.statusCode = 404;
     evetEmitter.emit('load file', './404.png');
-    evetEmitter.on('file loaded', function(data) {
+    evetEmitter.once('file loaded', function(data) {
       res.write(data);
       res.end();
     });
